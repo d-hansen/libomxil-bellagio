@@ -256,7 +256,7 @@ OMX_ERRORTYPE omx_base_component_ComponentDeInit(
   OMX_COMPONENTTYPE *openmaxStandComp = (OMX_COMPONENTTYPE *)hComponent;
   omx_base_component_PrivateType* omx_base_component_Private = (omx_base_component_PrivateType*)openmaxStandComp->pComponentPrivate;
 
-  DEBUG(DEB_LEV_FUNCTION_NAME, "In %s pComponentPrivate =%x \n", __func__,(int)openmaxStandComp->pComponentPrivate);
+  DEBUG(DEB_LEV_FUNCTION_NAME, "In %s pComponentPrivate =%p \n", __func__,openmaxStandComp->pComponentPrivate);
   omx_base_component_Private->destructor(openmaxStandComp);
 
   free(openmaxStandComp->pComponentPrivate);
@@ -1708,8 +1708,8 @@ OMX_ERRORTYPE omx_base_component_FillThisBuffer(
   }
   pPort = omx_base_component_Private->ports[pBuffer->nOutputPortIndex];
   if (pPort->sPortParam.eDir != OMX_DirOutput) {
-    DEBUG(DEB_LEV_ERR, "In %s: wrong port(%d) direction(%x) pBuffer=%x in Component %s\n", __func__,
-      (int)pBuffer->nOutputPortIndex, (int)pPort->sPortParam.eDir,(int)pBuffer,omx_base_component_Private->name);
+    DEBUG(DEB_LEV_ERR, "In %s: wrong port(%d) direction(%x) pBuffer=%p in Component %s\n", __func__,
+      (int)pBuffer->nOutputPortIndex, (int)pPort->sPortParam.eDir,pBuffer,omx_base_component_Private->name);
     return OMX_ErrorBadPortIndex;
   }
   return pPort->Port_SendBufferFunction(pPort,  pBuffer);

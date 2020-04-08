@@ -157,7 +157,6 @@ OMX_ERRORTYPE omx_videosrc_component_Constructor(OMX_COMPONENTTYPE *openmaxStand
  */
 OMX_ERRORTYPE omx_videosrc_component_Destructor(OMX_COMPONENTTYPE *openmaxStandComp) {
   omx_videosrc_component_PrivateType* omx_videosrc_component_Private = openmaxStandComp->pComponentPrivate;
-  OMX_ERRORTYPE err = OMX_ErrorNone;  
   OMX_U32 i;
   
   if(omx_videosrc_component_Private->videoSyncSem) {
@@ -166,7 +165,7 @@ OMX_ERRORTYPE omx_videosrc_component_Destructor(OMX_COMPONENTTYPE *openmaxStandC
     omx_videosrc_component_Private->videoSyncSem=NULL;
   }
 
-  err = uninit_device(omx_videosrc_component_Private);
+  uninit_device(omx_videosrc_component_Private);
  
   if(omx_videosrc_component_Private->deviceHandle != -1) {
     if(-1 == close(omx_videosrc_component_Private->deviceHandle)) {
@@ -588,7 +587,7 @@ OMX_ERRORTYPE videosrc_port_FreeBuffer(
       openmaxStandPort->bIsFullOfBuffers = OMX_FALSE;
       if (openmaxStandPort->bBufferStateAllocated[i] & BUFFER_ALLOCATED) {
         if(openmaxStandPort->pInternalBufferStorage[i]->pBuffer){
-          DEBUG(DEB_LEV_PARAMS, "In %s freeing %i pBuffer=%x\n",__func__, (int)i, (int)openmaxStandPort->pInternalBufferStorage[i]->pBuffer);
+          DEBUG(DEB_LEV_PARAMS, "In %s freeing %i pBuffer=%p\n",__func__, (int)i, openmaxStandPort->pInternalBufferStorage[i]->pBuffer);
           openmaxStandPort->pInternalBufferStorage[i]->pBuffer=NULL;
           omx_videosrc_component_Private->bOutBufferMemoryMapped = OMX_FALSE;
         }

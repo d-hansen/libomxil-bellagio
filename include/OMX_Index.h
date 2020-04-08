@@ -246,7 +246,12 @@ typedef enum OMX_INDEXTYPE {
        private indexes are not guaranteed unique and therefore should
        only be sent to the appropriate component. */
 
-    OMX_IndexMax = 0x7FFFFFFF
+    OMX_IndexMax = 0x7FFFFFFF,
+
+    /** only one index for file reader component input file */
+    OMX_IndexVendorInputFilename          = 0xFF000001,
+    OMX_IndexVendorOutputFilename         = 0xFF000002,
+    OMX_IndexVendorCompPropTunnelFlags    = 0xFF000003 /* Will use OMX_TUNNELSETUPTYPE structure*/
 
 } OMX_INDEXTYPE;
 

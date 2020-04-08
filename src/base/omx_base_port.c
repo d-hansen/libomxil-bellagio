@@ -558,7 +558,7 @@ OMX_ERRORTYPE base_port_FreeBuffer(
       openmaxStandPort->bIsFullOfBuffers = OMX_FALSE;
       if (openmaxStandPort->bBufferStateAllocated[i] & BUFFER_ALLOCATED) {
         if(openmaxStandPort->pInternalBufferStorage[i]->pBuffer){
-          DEBUG(DEB_LEV_PARAMS, "In %s freeing %i pBuffer=%x\n",__func__, (int)i, (int)openmaxStandPort->pInternalBufferStorage[i]->pBuffer);
+          DEBUG(DEB_LEV_PARAMS, "In %s freeing %i pBuffer=%p\n",__func__, (int)i, openmaxStandPort->pInternalBufferStorage[i]->pBuffer);
           free(openmaxStandPort->pInternalBufferStorage[i]->pBuffer);
           openmaxStandPort->pInternalBufferStorage[i]->pBuffer=NULL;
         }
